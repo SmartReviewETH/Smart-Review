@@ -60,7 +60,8 @@ contract intellectualProperty is ERC721, ERC721URIStorage, ERC721Burnable, Ownab
         onlyOwner
     {
         require(newMember != address(0) && shares[newMember] <= 0, "Invalid address"); // Ensure new member address is valid
-        shares[newMember]++; // Reduce old owner's share
+        shares[newMember]++; // Increase old owner's share
+        numSupplied[newMember] = 0;
     }
 
     function removeMember(address oldMember)
