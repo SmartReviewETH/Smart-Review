@@ -39,6 +39,7 @@ contract intellectualProperty is ERC721, ERC721URIStorage, ERC721Burnable, Ownab
     }
 
 
+    // add a new NFT
     function safeMint(address to, string memory uri)
         public
         onlyMember
@@ -82,6 +83,18 @@ contract intellectualProperty is ERC721, ERC721URIStorage, ERC721Burnable, Ownab
     {
         require(newOwner != address(0), "Invalid address"); // Ensure new owner address is valid
         transferOwnership(newOwner); // Transfer ownership using Ownable
+    }
+
+    // destroy the NFT in circulation
+    function burn(uint256 tokenId)
+        public
+        onlyMember
+        override(ERC721Burnable)
+    {
+        require(numSupplied[msg.sender] > 0, "Not authorized to burn");
+        numSupplied[msg.sender]--;
+
+        super._burn(tokenId);
     }
 
     function tokenURI(uint256 tokenId)
