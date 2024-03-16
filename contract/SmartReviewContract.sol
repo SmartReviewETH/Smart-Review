@@ -4,7 +4,14 @@ pragma solidity ^0.8.20;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "contract/VotingDAO.sol";
 
+interface SmartToken {
+  function transfer(address recipient, uint amount) external returns (bool);
+  function transferFrom(address sender, address recipient, uint amount) external returns (bool);
+  function balanceOf(address account) external view returns (uint);
+}
 contract SmartReviewContract  {
+    SmartToken internal immutable smts;
+
     //storage type
     mapping (uint => SmartReview) public SmartReviewsMapping; // id-> SmartReview 
     mapping (uint => Review[]) public ReviewsMapping; // id -> array of Reviews
@@ -30,6 +37,10 @@ contract SmartReviewContract  {
     event SmartReviewPublished(address payable[] issuers, string ipHash, string requirementsHash, uint256 deadline);
     event ReviewPublished(uint SmartReviewId, uint ReviewId, address payable issuer, string reviewFileHash);
     
+    constructor(address smts_) {
+        smts = SmartToken(smts_);
+    }
+
 
     function getSmartReviewsCount() external view returns(uint256) {
         return AllSmartReviews.length;
@@ -55,14 +66,13 @@ contract SmartReviewContract  {
         return true;
     }
     function AddBountyToSmartReview(uint256 smartReviewId, uint256 amount) external returns(bool){ 
-        address payable fromAccount = payable(msg.sender);
+        // address payable fromAccount = payable(msg.sender);
         // TODO: transfer the bounty amount from the address of the caller to this contract address
         // TODO: check sender's account balance
-        // TODO: 
+        require(smts.transfer(address(this), amount),"error");
         SmartReviewsMapping[smartReviewId].currentBalance += amount;
-        SmartReview memory targetSmartReview = SmartReviewsMapping[smartReviewId];
-        if(targetSmartReview.currentBalance >= targetSmartReview.bountyAmount){
-            targetSmartReview.phase = SmartReveiwPhases.ACTIVE;
+        if(SmartReviewsMapping[smartReviewId].currentBalance >=  SmartReviewsMapping[smartReviewId].bountyAmount){
+             SmartReviewsMapping[smartReviewId].phase = SmartReveiwPhases.ACTIVE;
         }
         return true;
     }
