@@ -13,10 +13,41 @@ contract VotingDAO is Ownable {
         uint256 createdAt;
         address proposer;
         bool executed;
+        uint good;   // number of viewers think this is good
+        uint bad;    // number of viewers think this is bad
+        // Simple mapping to check if a member has voted good
+        mapping (address => bool) votedGood;
+        // Simple mapping to check if a member has voted bad
+        mapping (address => bool) votedBad;
     }
-   constructor(address initialOwner) Ownable(initialOwner) {}
+    constructor(address initialOwner) Ownable(initialOwner) {}
 
-   function createProposal() public returns(bool){
-    // TODO
-   }
+    // Create a mapping of ID to Proposal
+    mapping(uint => ProposalData) public proposals;
+
+    modifier onlyMember() {
+        // TODO
+        _;
+    }
+
+    modifier onlyUnexecuted(uint proposalIndex) {
+        require(!proposals[proposalIndex].executed, "Only unexecuted proposal can be executed.");
+        _;
+    }
+
+    function createProposal() public onlyMember returns(bool){
+        // TODO
+    }
+
+    function vote() public onlyMember {
+        // TODO
+    }
+
+    function unVote() public onlyMember {
+        // TODO
+    }
+
+    function executeReward(uint proposalIndex) public onlyMember onlyUnexecuted(proposalIndex) {
+        // TODO
+    }
 }

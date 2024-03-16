@@ -66,7 +66,19 @@ contract SmartReviewContract  {
         }
         return true;
     }
-    function publishReview(string calldata reviewFileHash, uint smartReviewId) external returns (bool){
+
+    // Check if the reviewer is one of the issuer
+    function exists(address payable[] calldata issuers, address payable reviewer) public pure returns (bool) {
+        for (uint i = 0; i < issuers.length; i++) {
+            if (issuers[i] == reviewer) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    function publishReview(address payable[] calldata issuers, string calldata reviewFileHash, uint smartReviewId) external returns (bool){
+        require(!exists(issuers, payable(msg.sender)), "Issuers cannot review their own work.");
         // VotingDAO votingDaoInstance = VotingDAO(msg.sender);
         Review memory Reviewobj = Review(payable(msg.sender), reviewFileHash, ReveiwPhases.ACTIVE);
         
