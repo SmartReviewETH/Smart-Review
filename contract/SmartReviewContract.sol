@@ -3,14 +3,10 @@ pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "contract/VotingDAO.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-interface SmartToken {
-  function transfer(address recipient, uint amount) external returns (bool);
-  function transferFrom(address sender, address recipient, uint amount) external returns (bool);
-  function balanceOf(address account) external view returns (uint);
-}
 contract SmartReviewContract  {
-    SmartToken internal immutable smts;
+    IERC20 public smts;
 
     //storage type
     mapping (uint => SmartReview) public SmartReviewsMapping; // id-> SmartReview 
@@ -34,11 +30,11 @@ contract SmartReviewContract  {
         string reviewFileHash;
         ReveiwPhases phase;
     }
-    event SmartReviewPublished(address payable[] issuers, string ipHash, string requirementsHash, uint256 deadline);
+    event SmartReviewPublished(address payable[] issuers, string ipHash, string requirementsHash, uint256 deadline,uint256 bountyAmount);
     event ReviewPublished(uint SmartReviewId, uint ReviewId, address payable issuer, string reviewFileHash);
     
     constructor(address smts_) {
-        smts = SmartToken(smts_);
+        smts = IERC20(smts_);
     }
 
 
@@ -61,15 +57,14 @@ contract SmartReviewContract  {
         AllSmartReviews.push(newReview);
         id_counter_smartReview++;
         //emit event
-        emit SmartReviewPublished(issuers, ipHash, requirementsHash, deadline);
+        emit SmartReviewPublished(issuers, ipHash, requirementsHash, deadline, bountyAmount);
         
         return true;
     }
-    function AddBountyToSmartReview(uint256 smartReviewId, uint256 amount) external returns(bool){ 
-        // address payable fromAccount = payable(msg.sender);
+    function AddBountyToSmartReview(uint256 smartReviewId, uint256 amount) public returns(bool){ 
         // TODO: transfer the bounty amount from the address of the caller to this contract address
         // TODO: check sender's account balance
-        require(smts.transfer(address(this), amount),"error");
+        require(smts.transferFrom(msg.sender,address(this), amount),"error tranfer money");
         SmartReviewsMapping[smartReviewId].currentBalance += amount;
         if(SmartReviewsMapping[smartReviewId].currentBalance >=  SmartReviewsMapping[smartReviewId].bountyAmount){
              SmartReviewsMapping[smartReviewId].phase = SmartReveiwPhases.ACTIVE;
