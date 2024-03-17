@@ -114,7 +114,7 @@ contract SmartReviewContract  {
             transferAmount = SmartReviewsMapping[smartReviewId].currentBalance / reviewCompleteCount;
         }
 
-        for (uint256 i = 0; i < reviewCompleteCount; i++) {
+        for (uint256 i = 0; i < reviews.length && reviewCompleteCount > 0; i++) {
             if (reviews[i].phase == ReveiwPhases.ACCEPTED) {
                     require(smts.transferFrom(
                         address(this),
