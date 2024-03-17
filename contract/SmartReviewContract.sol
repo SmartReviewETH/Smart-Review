@@ -32,7 +32,7 @@ contract SmartReviewContract  {
     }
     event SmartReviewPublished(address payable[] issuers, string ipHash, string requirementsHash, uint256 deadline,uint256 bountyAmount);
     event ReviewPublished(uint SmartReviewId, uint ReviewId, address payable issuer, string reviewFileHash);
-    
+
     constructor(address smts_) {
         smts = IERC20(smts_);
     }
@@ -62,16 +62,16 @@ contract SmartReviewContract  {
         return true;
     }
     function AddBountyToSmartReview(uint256 smartReviewId, uint256 amount) public returns(bool){ 
-        // TODO: transfer the bounty amount from the address of the caller to this contract address
-        // TODO: check sender's account balance
-        require(smts.transferFrom(msg.sender,address(this), amount),"error tranfer money");
+        // transfer the bounty amount from the address of the caller to this contract address
+        require(smts.transferFrom(msg.sender,address(this), amount), "error in tranfer token to the SmartReview Contract");
         SmartReviewsMapping[smartReviewId].currentBalance += amount;
         if(SmartReviewsMapping[smartReviewId].currentBalance >=  SmartReviewsMapping[smartReviewId].bountyAmount){
              SmartReviewsMapping[smartReviewId].phase = SmartReveiwPhases.ACTIVE;
         }
+        //TODO:emit event
         return true;
     }
-
+    
     // Check if the reviewer is one of the issuer
     function exists(address payable[] calldata issuers, address payable reviewer) private pure returns (bool) {
         for (uint i = 0; i < issuers.length; i++) {
@@ -79,19 +79,13 @@ contract SmartReviewContract  {
                 return true;
             }
         }
-
         return false;
     }
     function publishReview(string calldata reviewFileHash, uint smartReviewId) external returns (bool){
-        // VotingDAO votingDaoInstance = VotingDAO(msg.sender);
         Review memory Reviewobj = Review(payable(msg.sender), reviewFileHash, ReveiwPhases.ACTIVE);
-        
         ReviewsMapping[smartReviewId].push(Reviewobj);
-
         //emit event
         emit ReviewPublished(smartReviewId, ReviewsMapping[smartReviewId].length, payable(msg.sender), reviewFileHash);
-        // initiliate a voting proposals
-        // votingDaoInstance.createProposal();
         return true;
     }
     
