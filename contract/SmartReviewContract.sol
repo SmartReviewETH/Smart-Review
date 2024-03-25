@@ -16,6 +16,7 @@ contract SmartReviewContract  {
     enum ReveiwPhases {ACTIVE, ACCEPTED}
 
     SmartReview[] public AllSmartReviews;
+
     struct SmartReview {
         address payable[] issuers;
         string ipHash;
@@ -24,6 +25,7 @@ contract SmartReviewContract  {
         SmartReveiwPhases phase;
         uint256 bountyAmount;
         uint256 currentBalance; // initially 0
+        string[2] info; // first element is title, second is description
     }
     struct Review{
         address payable issuer;
@@ -62,8 +64,8 @@ contract SmartReviewContract  {
         return ReviewsMapping[smartReviewId][reviewId]; 
     }
 
-    function publishSmartReview(address payable[] calldata issuers, string calldata ipHash, string calldata requirementsHash, uint256 deadline, uint256 bountyAmount) external returns(bool) {  
-        SmartReview memory newReview = SmartReview(issuers, ipHash, requirementsHash, deadline, SmartReveiwPhases.PAUSED, bountyAmount, 0);
+    function publishSmartReview(address payable[] calldata issuers, string calldata ipHash, string calldata requirementsHash, uint256 deadline, uint256 bountyAmount,string[2] calldata info) external returns(bool) {  
+        SmartReview memory newReview = SmartReview(issuers, ipHash, requirementsHash, deadline, SmartReveiwPhases.PAUSED, bountyAmount, 0, info);
         SmartReviewsMapping[id_counter_smartReview] = newReview;
         AllSmartReviews.push(newReview);
         id_counter_smartReview++;
