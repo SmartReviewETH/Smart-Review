@@ -1,6 +1,6 @@
 {
   "name": "SmartReviewContract",
-  "address": "0x0a8fedebcfc750f81de3aca118fff855360066b2",
+  "address": "0xdcb2c1f4f07798a9f1e611d0db9091424a81c4f4",
   "abi": [
     {
       "inputs": [
@@ -119,6 +119,11 @@
           "internalType": "uint256",
           "name": "bountyAmount",
           "type": "uint256"
+        },
+        {
+          "internalType": "string[2]",
+          "name": "info",
+          "type": "string[2]"
         }
       ],
       "name": "publishSmartReview",
@@ -512,6 +517,11 @@
               "internalType": "uint256",
               "name": "currentBalance",
               "type": "uint256"
+            },
+            {
+              "internalType": "string[2]",
+              "name": "info",
+              "type": "string[2]"
             }
           ],
           "internalType": "struct SmartReviewContract.SmartReview",
@@ -628,5 +638,5 @@
     }
   ],
   "filePath": "Smart-Review.git/contract/SmartReviewContract.sol",
-  "pinnedAt": 1710971540898
+  "pinnedAt": 1711348958183
 }

@@ -23,9 +23,9 @@ contract SmartReviewContract  {
         string requirementsHash;
         uint256 deadline;
         SmartReveiwPhases phase;
-        uint256 bountyAmount;
-        uint256 currentBalance; // initially 0
-        string[2] info; // first element is title, second is description
+        uint256 bountyAmount; //in Wei
+        uint256 currentBalance; // initially 0 in Wei
+        string[2] info; // first element in the array is title, second is description
     }
     struct Review{
         address payable issuer;
