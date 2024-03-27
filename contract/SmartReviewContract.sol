@@ -11,8 +11,9 @@ contract SmartReviewContract  {
     //storage type
     mapping (uint => SmartReview) public SmartReviewsMapping; // id-> SmartReview 
     mapping (uint => Review[]) public ReviewsMapping; // id -> array of Reviews
+
     uint id_counter_smartReview = 0; // counter for SmartReview id
-    enum SmartReveiwPhases {ACTIVE, PAUSED, EXPIRED, PAID}
+    enum SmartReveiwPhases {ACTIVE, PAUSED, EXPIRED, COMPLETE}
     enum ReveiwPhases {ACTIVE, ACCEPTED}
 
     SmartReview[] public AllSmartReviews;
@@ -31,6 +32,8 @@ contract SmartReviewContract  {
         address payable issuer;
         string reviewFileHash;
         ReveiwPhases phase;
+        string proposal_id; // for storing proposal id
+
     }
     event SmartReviewPublished(address payable[] issuers, string ipHash, string requirementsHash, uint256 deadline,uint256 bountyAmount,uint256 smartReviewId);
     event ReviewPublished(uint SmartReviewId, uint ReviewId, address payable issuer, string reviewFileHash);
@@ -97,6 +100,8 @@ contract SmartReviewContract  {
 
     // complete the review acception
     function completeSmartReview(uint256 smartReviewId) public returns(bool) {
+        // check current date is after dealine
+
         require(smartReviewId < id_counter_smartReview && smartReviewId >= 0, "Invalid smart review id");
         require(SmartReviewsMapping[smartReviewId].phase == SmartReveiwPhases.ACTIVE, "Smart Review should be active before complete!");
 
@@ -114,7 +119,7 @@ contract SmartReviewContract  {
         if (reviewCompleteCount > 0) {
             transferAmount = SmartReviewsMapping[smartReviewId].currentBalance / reviewCompleteCount;
         }
-
+        
         for (uint256 i = 0; i < reviews.length && reviewCompleteCount > 0; i++) {
             if (reviews[i].phase == ReveiwPhases.ACCEPTED) {
                     require(smts.transferFrom(
@@ -124,15 +129,14 @@ contract SmartReviewContract  {
                     ), string.concat("Transfer failed for issuer ", Strings.toHexString(uint160(address(reviews[i].issuer)), 20))
                 );
             }
+        
         }
+        // if no reviews at all, there will be no transfer and the amount will stay in the main contract.
 
         SmartReviewsMapping[smartReviewId].currentBalance = 0;
         uint256 nowTime = block.timestamp;
-        if (SmartReviewsMapping[smartReviewId].deadline < nowTime) {
-            SmartReviewsMapping[smartReviewId].phase = SmartReveiwPhases.EXPIRED;
-        } else {
-            SmartReviewsMapping[smartReviewId].phase = SmartReveiwPhases.PAID;
-        }
+      
+        SmartReviewsMapping[smartReviewId].phase = SmartReveiwPhases.COMPLETE;
 
         emit SmartReviewCompleted(nowTime, SmartReviewsMapping[smartReviewId].deadline, transferAmount, smartReviewId, uint256(SmartReviewsMapping[smartReviewId].phase));
         return true;
@@ -147,10 +151,10 @@ contract SmartReviewContract  {
         }
         return false;
     }
-    function publishReview(string calldata reviewFileHash, uint smartReviewId) external returns (bool){
+    function publishReview(string calldata reviewFileHash, uint smartReviewId, string calldata proposal_id) external returns (bool){
         require(smartReviewId < id_counter_smartReview && smartReviewId >= 0, "Invalid smart review id");
         
-        Review memory Reviewobj = Review(payable(msg.sender), reviewFileHash, ReveiwPhases.ACTIVE);
+        Review memory Reviewobj = Review(payable(msg.sender), reviewFileHash, ReveiwPhases.ACTIVE, proposal_id);
         ReviewsMapping[smartReviewId].push(Reviewobj);
         //emit event
         emit ReviewPublished(smartReviewId, ReviewsMapping[smartReviewId].length, payable(msg.sender), reviewFileHash);
