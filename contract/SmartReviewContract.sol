@@ -142,7 +142,7 @@ contract SmartReviewContract  {
     }
     
     // Check if the reviewer is one of the issuer
-    function exists(address payable[] calldata issuers, address payable reviewer) private pure returns (bool) {
+    function exists(address payable[] memory issuers, address payable reviewer) private pure returns (bool) {
         for (uint i = 0; i < issuers.length; i++) {
             if (issuers[i] == reviewer) {
                 return true;
@@ -150,9 +150,11 @@ contract SmartReviewContract  {
         }
         return false;
     }
+
     function publishReview(string calldata reviewFileHash, uint smartReviewId, string calldata proposal_id) external returns (bool){
         require(smartReviewId < id_counter_smartReview && smartReviewId >= 0, "Invalid smart review id");
-        
+        SmartReview memory SmartReviewObj = SmartReviewsMapping[smartReviewId];
+        require(!exists((SmartReviewObj.issuers), payable(msg.sender)), "Author can not review his/her own IPs.");
         Review memory Reviewobj = Review(payable(msg.sender), reviewFileHash, ReveiwPhases.ACTIVE, proposal_id);
         ReviewsMapping[smartReviewId].push(Reviewobj);
         //emit event
