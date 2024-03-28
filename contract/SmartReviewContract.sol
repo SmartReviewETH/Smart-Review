@@ -33,7 +33,6 @@ contract SmartReviewContract  {
         string reviewFileHash;
         ReveiwPhases phase;
         string proposal_id; // for storing proposal id
-
     }
     event SmartReviewPublished(address payable[] issuers, string ipHash, string requirementsHash, uint256 deadline,uint256 bountyAmount,uint256 smartReviewId);
     event ReviewPublished(uint SmartReviewId, uint ReviewId, address payable issuer, string reviewFileHash);
