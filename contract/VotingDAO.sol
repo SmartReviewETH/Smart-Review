@@ -3,6 +3,9 @@ pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "contract/SmartReviewContract.sol";
+import "contract/GovernorContract.sol";
+import "contract/SmartToken.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract VotingDAO is Ownable {
  
@@ -17,11 +20,15 @@ contract VotingDAO is Ownable {
         uint bad;    // number of viewers think this is bad
         // Simple mapping to check if a member has voted good
         mapping (address => bool) votedGood;
-        // Simple mapping to check if a member has voted bad
-        mapping (address => bool) votedBad;
+        // Simple mapping to check if a member has voted
+        mapping (address => bool) voted;
     }
-    constructor(address initialOwner) Ownable(initialOwner) {
+
+    IERC20 public smts;
+
+    constructor(address initialOwner, address _smts) Ownable(initialOwner) {
         proposalId = 0;
+        smts = IERC20(_smts);
     }
 
     // Create a mapping of ID to Proposal
@@ -32,6 +39,7 @@ contract VotingDAO is Ownable {
     mapping(address => bool) isMember;
 
     event proposalCreated(uint id, string description, address proposer);
+    event proposalexecuted(uint id);
 
     modifier onlyMember() {
         require(isMember[msg.sender], "Only member allowed.");
@@ -57,14 +65,19 @@ contract VotingDAO is Ownable {
         proposalId++;
     }
 
-    function vote(uint _proposalId, bool _approve) public onlyMember {
+    function vote(uint _proposalId, bool _support) public onlyMember {
         ProposalData storage proposal = proposals[_proposalId];
+        require(!proposal.voted[msg.sender], "Error: This members has already voted this proposal");
 
-        if(_approve){
+        if(_support){
             proposal.good++;
+            proposal.votedGood[msg.sender] = true;
+            proposal.voted[msg.sender] = true;
         }
         else{
             proposal.bad++;
+            proposal.voted[msg.sender] = true;
+            proposal.votedGood[msg.sender] = false;
         }
     }
 
@@ -72,8 +85,13 @@ contract VotingDAO is Ownable {
         // TODO
     }
 
-    function executeReward(uint proposalIndex) public onlyMember onlyUnexecuted(proposalIndex) {
-        // TODO
+    function approve(uint _proposalId) public returns (bool) {
+        return true;
+    }
+
+    function executeReward(uint proposalIndex, uint amount) public onlyMember onlyUnexecuted(proposalIndex) {
+        require(approve(proposalIndex), "This roposal is not approved.");
+        smts.transferFrom(address(this), proposals[proposalIndex].proposer, amount);
     }
 
     function addMember(address _member) public onlyOwner {
