@@ -7,6 +7,7 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract SmartReviewContract  {
     IERC20 public smts;
+    address public governor;
 
     //storage type
     mapping (uint => SmartReview) public SmartReviewsMapping; // id-> SmartReview 
@@ -42,8 +43,13 @@ contract SmartReviewContract  {
 
     constructor(address smts_) {
         smts = IERC20(smts_);
+        governor = 0x8939843484975DD23b30951FEac7317335969ec3;  // TODO: This is for testing, reset to official Governor
     }
 
+    modifier onlyGovernor {
+        require(msg.sender == governor);
+        _;
+    }
 
     function getSmartReviewsCount() external view returns(uint256) {
         return AllSmartReviews.length;
@@ -87,7 +93,7 @@ contract SmartReviewContract  {
         return true;
     }
 
-    function completeReview(uint256 reviewId, uint256 smartReviewId)  external returns (bool) {
+    function completeReview(uint256 reviewId, uint256 smartReviewId) onlyGovernor external returns (bool) {
         // TODO: complete the full logic to complete a review
         require(smartReviewId < id_counter_smartReview && smartReviewId >= 0, "Invalid smart review id");
         require(reviewId < ReviewsMapping[smartReviewId].length && reviewId >= 0, "Invalid review id");
