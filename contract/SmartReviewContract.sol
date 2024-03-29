@@ -7,6 +7,7 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract SmartReviewContract  {
     IERC20 public smts;
+    address public governor;
 
     //storage type
     mapping (uint => SmartReview) public SmartReviewsMapping; // id-> SmartReview 
@@ -42,8 +43,13 @@ contract SmartReviewContract  {
 
     constructor(address smts_) {
         smts = IERC20(smts_);
+        governor = 0x8939843484975DD23b30951FEac7317335969ec3;  // TODO: This is for testing, reset to official Governor
     }
 
+    modifier onlyGovernor {
+        require(msg.sender == governor);
+        _;
+    }
 
     function getSmartReviewsCount() external view returns(uint256) {
         return AllSmartReviews.length;
@@ -87,7 +93,7 @@ contract SmartReviewContract  {
         return true;
     }
 
-    function completeReview(uint256 reviewId, uint256 smartReviewId)  external returns (bool) {
+    function completeReview(uint256 reviewId, uint256 smartReviewId) onlyGovernor external returns (bool) {
         // TODO: complete the full logic to complete a review
         require(smartReviewId < id_counter_smartReview && smartReviewId >= 0, "Invalid smart review id");
         require(reviewId < ReviewsMapping[smartReviewId].length && reviewId >= 0, "Invalid review id");
@@ -100,12 +106,13 @@ contract SmartReviewContract  {
     // complete the review acception
     function completeSmartReview(uint256 smartReviewId) public returns(bool) {
         // check current date is after dealine
-
+        uint256 nowTime = block.timestamp;
+        require(SmartReviewsMapping[smartReviewId].deadline < nowTime, "Smart Review can not be completed, it has not passed deadline yet");
         require(smartReviewId < id_counter_smartReview && smartReviewId >= 0, "Invalid smart review id");
         require(SmartReviewsMapping[smartReviewId].phase == SmartReveiwPhases.ACTIVE, "Smart Review should be active before complete!");
 
         Review[] memory reviews = ReviewsMapping[smartReviewId];
-        smts.approve(address(this), 2^256 - 1);
+        // smts.approve(address(this), 2^256 - 1);
         uint256 transferAmount = 0;
         uint256 reviewCompleteCount = 0;
 
@@ -121,8 +128,7 @@ contract SmartReviewContract  {
         
         for (uint256 i = 0; i < reviews.length && reviewCompleteCount > 0; i++) {
             if (reviews[i].phase == ReveiwPhases.ACCEPTED) {
-                    require(smts.transferFrom(
-                        address(this),
+                    require(smts.transfer(
                         reviews[i].issuer,
                         transferAmount
                     ), string.concat("Transfer failed for issuer ", Strings.toHexString(uint160(address(reviews[i].issuer)), 20))
@@ -133,7 +139,7 @@ contract SmartReviewContract  {
         // if no reviews at all, there will be no transfer and the amount will stay in the main contract.
 
         SmartReviewsMapping[smartReviewId].currentBalance = 0;
-        uint256 nowTime = block.timestamp;
+
       
         SmartReviewsMapping[smartReviewId].phase = SmartReveiwPhases.COMPLETE;
 
