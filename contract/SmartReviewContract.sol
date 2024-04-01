@@ -47,7 +47,7 @@ contract SmartReviewContract  {
     }
 
     modifier onlyGovernor {
-        require(msg.sender == governor);
+        require(msg.sender == governor, "Only Governor allowed");
         _;
     }
 
