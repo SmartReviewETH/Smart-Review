@@ -13,10 +13,10 @@ import "@openzeppelin/contracts/governance/extensions/GovernorTimelockControl.so
 contract SmartReviewGovernor is Governor, GovernorSettings, GovernorCountingSimple, GovernorVotes, GovernorVotesQuorumFraction, GovernorTimelockControl {
     constructor(IVotes _token, TimelockController _timelock)
         Governor("SmartReviewGovernor")
-        GovernorSettings(1 , 20 , 1e18) // For Testing
+        GovernorSettings(1 , 25 , 1e18) // For Testing
         //GovernorSettings(7200 /* 1 day */, 100800 /* 2 week */, 1e18)
         GovernorVotes(_token)
-        GovernorVotesQuorumFraction(4)
+        GovernorVotesQuorumFraction(1)
         GovernorTimelockControl(_timelock)
     {}
 
