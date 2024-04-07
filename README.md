@@ -6,7 +6,7 @@
 
 
 
-## :rocket: Quick Start{#start-id}
+## :rocket: Quick Start
 Please run the [Web App](https://smartreview1.netlify.app) to start
 Before running it, please ensure :
 
@@ -26,7 +26,7 @@ https://github.com/SmartReviewETH/smart-review-front-end
 ## System Architecture
 ![Blank diagram (2)](https://github.com/vvvxxx321/Smart-Review/assets/55036290/66cc9ae2-7bf5-447f-a831-6111354e8229)
 
-## :fire:  Why choose Smart-Review{#wse-id}
+## :fire:  Why choose Smart-Review
 ### Problem Statement
  - Traditional review is not incentivized and therefore lacks participation from a broader audience, especially in the open source and scientific community
  - Bias from reviewers may hinder the wide adoption of cutting-edge work
