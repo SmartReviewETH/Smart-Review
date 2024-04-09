@@ -9,7 +9,7 @@ MIT license
 - This repository involves the smart contracts written in solidity
 
 ## :rocket: Quick Start
-Please run the [Web App](https://smartreview1.netlify.app) to start.
+Link to our [Web App](https://smartreview1.netlify.app) .
 Before running it, please ensure:
 
  - Meta Mask installed (Mobile APP or browser plugin)
