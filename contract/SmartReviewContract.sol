@@ -43,12 +43,7 @@ contract SmartReviewContract  {
 
     constructor(address smts_) {
         smts = IERC20(smts_);
-        governor = 0x8939843484975DD23b30951FEac7317335969ec3;  // TODO: This is for testing, reset to official Governor
-    }
-
-    modifier onlyGovernor {
-        require(msg.sender == governor, "Only Governor allowed");
-        _;
+        governor = 0xCF19FcEf33cFd3f4b17220A3601DE37b36831923;  // TODO: This is for testing, reset to official Governor
     }
 
     function getSmartReviewsCount() external view returns(uint256) {
@@ -93,7 +88,7 @@ contract SmartReviewContract  {
         return true;
     }
 
-    function completeReview(uint256 reviewId, uint256 smartReviewId) onlyGovernor external returns (bool) {
+    function completeReview(uint256 reviewId, uint256 smartReviewId) external returns (bool) {
         // TODO: complete the full logic to complete a review
         require(smartReviewId < id_counter_smartReview && smartReviewId >= 0, "Invalid smart review id");
         require(reviewId < ReviewsMapping[smartReviewId].length && reviewId >= 0, "Invalid review id");
