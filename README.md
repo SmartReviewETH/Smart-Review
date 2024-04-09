@@ -24,7 +24,7 @@ Before running it, please ensure :
 https://github.com/SmartReviewETH/smart-review-front-end
 
 ## System Architecture
-![Blank diagram (2)](https://github.com/SmartReviewETH/Smart-Review/assets/152730008/5dafa51b-a0e3-4cc0-8133-1837583eeda3)
+![Blank diagram (2)](https://github.com/SmartReviewETH/Smart-Review/assets/152730008/b2e87586-b3a3-48ab-a974-f923debff63e)
 
 ## :fire:  Why choose Smart-Review
 ### Problem Statement
