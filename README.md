@@ -9,14 +9,14 @@ MIT license
 - This repository involves the smart contracts written in solidity
 
 ## :rocket: Quick Start
-Please run the [Web App](https://smartreview1.netlify.app) to start
-Before running it, please ensure :
+Please run the [Web App](https://smartreview1.netlify.app) to start.
+Before running it, please ensure:
 
  - Meta Mask installed (Mobile APP or browser plugin)
- - Sepolia ETH available (gas fee for voting)
+ - Sepolia ETH available (gas fee for all the operations on our platform)
  - Ethereum network changed to Sepolia test network
 
-:fire:Here are some resources where you can get free Sepolia ETH:
+:fire: Here are some resources where you can get free Sepolia ETH:
 	
  - [Alchemy Sepolia Faucet](https://www.alchemy.com/faucets/ethereum-sepolia)
  - [Infura Sepolia Faucet](https://www.infura.io/faucet/sepolia)
@@ -35,23 +35,23 @@ https://github.com/SmartReviewETH/smart-review-front-end
 ### Our Solutions
 - Key features
 	- [ERC-20 token](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/)
-	  We implemented our own ERC-20 token named **SmartToken**, with symbol "**SMT**" [(view this token in Etherscan)](https://sepolia.etherscan.io/token/0xFb3901F9Fc06045f9cE03EeEB21485559A858784). The SMT tokens are rewarded to contributors in the community based on their roles and contributions as the following:
-	  
-		- A reviewer will be rewarded if the proposals of his/her review is approved and executed after the voting period by DAO
-		- A member of the DAO will be rewarded if his/her voted proposal is approved and executed
+	  We implemented our own ERC-20 token named **SmartToken**, with the symbol "**SMT**" [(view this token in Etherscan)](https://sepolia.etherscan.io/token/0xFb3901F9Fc06045f9cE03EeEB21485559A858784). The SMT tokens are rewarded to contributors in the community based on their roles and contributions as the following:
 	
-	 	The reward mechanism with cryptocurrency will significantly improve the  incentivization of the community, encourage community members participating in activities. We also have a faucet mechanism for the tokens.
-
-	- We implemented a smart contract to manage the SmartTokens and provide basic data types and operations (such as request for reviews on one's work, proposal for a review and completion of the request/proposal) to support our application.
-	- A governor contract and voting DAO to support voting for reviews.
+		- A reviewer will be rewarded if the proposals of his/her reviews are approved and executed after reaching a quorum in SmartReview DAO.
+		- A member of the DAO will be rewarded if his/her voted proposals are approved and executed
+	
+	 	The reward mechanism with cryptocurrency will significantly provide the incentivization, and encourage open-participation. We also have a faucet mechanism for getting free tokens to start.
+	- SmartReviewContract.sol is used for providing basic data types and functions to support our application, such as initiating a smartReview, reviewing one's work, and completing the reviews/SmartReview.
+	- GovernorContract.sol is A governor contract and voting DAO to support voting for reviews.
  	- A user-friendly frontend to visualize all operations.
+    	- IPFS for distributed decentralized file storage.
 
 - Please watch [this]() video on how to use this app.
-- We have the potential users as following:
-	- A researcher new to the research community and has some potential cutting-edge discoveries/inventions. He/she can submit his/her work on our platform.
-	- A researcher who wishes to get inspired from others' works with incentives and hope someone to check his/her thoughts. He/she can leave a review on our platform.
- 	- A researcher who has thoughts on others' reviews about someone's work and expect to see his thoughts are proved true/false in some way. He/she can vote for the reviews.
-	- Practitioners with other occupations with the similiar goals.
+- Target users include:
+	- A researcher new to the research community and has some potential cutting-edge discoveries/inventions. He/she can submit his/her work on our platform and request reviews.
+	- A researcher who wishes to get inspired by others' works and wishes to earn incentives by leave a review on our platform.
+ 	- A researcher who has an opinion on others' reviews and can participate in voting about the reviews.
+	- Practitioners with other occupations with similar goals.
 
 ## :mortar_board: How to use?
 __Note:__ please watch the [instruction video]() section at first.
@@ -64,26 +64,24 @@ __Note:__ please watch the [instruction video]() section at first.
 
 ## :pager: Local setup instructions
 
-Actually you do not have to setup this application locally, since you can access this application online. But we can provide ideas on local setup.
-
-- __Dependencies:__ You must install dependencies for our front end. Please clone our front end repository at first, then switch to the root directory and run __npm install__ to install all required libraries, and run __npm start__ to start the front end. We have deployed all smart contracts for you.
-- __Tests__: We use the front end for usability tests, so we do not have a script for performance tests.
-- __Smart contracts deployment__: You do not have to deploy any, but here is an instruction on deployment. This repository holds all smart contracts for this application, you can first clone this repository to the [Remix](https://remix.ethereum.org/), a browser-embedded IDE for smart contracts implemented with Solidity. Then compile and deploy each smart contract by the following steps:
+- __Front-end Local Setup:__ You must install dependencies for our front end. Please clone our front-end repository at first, then switch to the root directory and run __npm install__ to install all required libraries, and run __npm start__ to start the front end. We have deployed all smart contracts for you.
+- __Tests__: We use the front end for usability tests and all the functionality has been achieved.
+- __Smart contracts Setup__: This repository holds all smart contracts for this application, you can first clone this repository in the [Remix](https://remix.ethereum.org/), a browser-embedded IDE for smart contracts implemented with Solidity. Then compile and deploy each smart contract by the following steps:
 	- ...
 	- Compile the SmartToken contract, and then deploy it.
  	- Compile the SmartTokenFacet contract, and then deploy it.
  	- Compile the VotingDAO contract, and then deploy it.
   	- Compile the TimeLock contract, and then deploy it.
   	- Compile the GovernorContract contract, and then deploy it.
- 	- Compile the SmartReviewContract contract, and provide the address of SmartToken contract to SmartReviewContract contract to deploy it.
+ 	- Compile the SmartReviewContract contract, and provide the address of the SmartToken contract to the SmartReviewContract contract to deploy it.
 
 ## :heavy_exclamation_mark: Acknowledgement
 
-To build our project, we have been inspired from some previous works.
+To build our project, we have been inspired by some previous works.
  - [AntsReview](https://github.com/naszam/ants-review)
  	- allow issuers to issue an AntReview
   	- a bounty for peer-review in scientific publication
-   	- linked to requirements stored on ipfs which peer-reviewers can fufill by submitting the ipfs hash which contains evidence of their fufillment
+   	- linked to requirements stored on ipfs which peer-reviewers can fulfill by submitting the IPFS hash which contains evidence of their fulfillment
 	- after the submission of successful peer-reviews, they will be approved by an approver and payed in ANTS
    We designed our workflow based on the framework of this project. But we have added our own components, such as review request proposal, review completion, voting mechanism, etc.
 
