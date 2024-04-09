@@ -1,5 +1,9 @@
 # Smart-Review(Decentralized Review Platform)
 |[:rocket:Quick Start](#start_id) | [:fire:Why choose Smart Review](#wse-id)|
+
+## :page_with_curl: License
+MIT license
+
 ## :star: Context
 - Smart-Review is a decentralized review platform with an incentivized and private reviewing mechanism
 - This repository involves the smart contracts written in solidity
