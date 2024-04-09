@@ -60,7 +60,7 @@ __Note:__ please watch the [instruction video]() section at first.
 - __Any required library?__ No, this application has been deployed on cloud.
 - __How to run it?__ Please follow the [demo video](), which walks through all the operations you can take.
 - __How this application helps different types of users?__ We are proud to say that our application can adapt the general usage for all kinds of users who would like share their innovative ideas and leave reviews on these ideas which can then be voted to guarantee the quality. All the operations are incentivized.
-- __About wallet?__ Please connect to your Metamask account to support any transaction on this platform. We used __sepolia__ as our testnet. Please get at least 0.01 SepoliaETH before connecting any operation since you need this to start any transaction.
+- __About wallet?__ Please connect to your Metamask account to support any transaction on this platform. We use __sepolia__ as our testnet. Please get at least 0.01 SepoliaETH before connecting any operation since you need this to start any transaction
 
 ## :pager: Local setup instructions
 
