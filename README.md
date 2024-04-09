@@ -45,10 +45,10 @@ https://www.tally.xyz/gov/smartreview
 	
 	  The reward mechanism with cryptocurrency will significantly provide the incentivization, and encourage open-participation. We also have a faucet mechanism for getting free tokens to start.
 	- SmartReviewContract.sol is used for providing basic data types and functions to support our application, such as initiating a smartReview, reviewing one's work, and completing the reviews/SmartReview.
-	- GovernorContract.sol is used to manage proposals that are generated from reviews in our application. SmartToken holders can interact with this contract to vote for, against or abstain on each proposal deciding whether or not the review is good enough. Once the proposal is passed, the predefined code will be executed and the reviewer can get the compensation. For each proposal there are some settings (current settings for test):
+	- GovernorContract.sol is used to manage proposals that are generated from reviews in our application. The decision mechanism is based on token based voting. ([More](https://limechain.tech/blog/dao-voting-mechanisms-explained/) on voting machanism) SmartToken holders can interact with this contract to vote for, against or abstain on each proposal deciding whether or not the review is good enough. Once the proposal is passed, the predefined code will be executed and the reviewer can get the compensation. For each proposal there are some settings (current settings for test):
  		- Voting period (5 minutes): period of time allowed to vote.
-		- Quorum needed (100 tokens): number of tokens needed to pass the proposal.
-		- Proposal threshold (1 token): number of tokens needed to create proposal.
+		- Quorum needed (100 votes): minimum number of votes needed to pass the proposal.
+		- Proposal threshold (1 token): munimum number of tokens needed to create proposal.
 		- Queue: the period of time that the proposal is postaponed before execution, members can act accordingly in this time.
  	- SmartTokenFaucet.sol is used to provide free SmartTokens for new members. New members can get a certain amount of SmartTokens to start their journey on our platform.
  	- A user-friendly frontend to visualize all operations.
