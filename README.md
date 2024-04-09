@@ -24,6 +24,9 @@ Before running it, please ensure:
 ## :eyes: Front end Github repo
 https://github.com/SmartReviewETH/smart-review-front-end
 
+## 🗳️ Tally Link for DAO 
+https://www.tally.xyz/gov/smartreview
+
 ## :computer: System Architecture
 ![Blank diagram (2)](https://github.com/SmartReviewETH/Smart-Review/assets/152730008/b2e87586-b3a3-48ab-a974-f923debff63e)
 
@@ -34,7 +37,7 @@ https://github.com/SmartReviewETH/smart-review-front-end
  - Traditional reviews usually take longer to process
 ### Our Solutions
 - Key features
-	- [ERC-20 token](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/)
+	- SmartToken.sol [ERC-20 token](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/)
 	  We implemented our own ERC-20 token named **SmartToken**, with the symbol "**SMT**" [(view this token in Etherscan)](https://sepolia.etherscan.io/token/0xFb3901F9Fc06045f9cE03EeEB21485559A858784). The SMT tokens are rewarded to contributors in the community based on their roles and contributions as the following:
 	
 		- A reviewer will be rewarded if the proposals of his/her reviews are approved and executed after reaching a quorum in SmartReview DAO.
@@ -42,7 +45,12 @@ https://github.com/SmartReviewETH/smart-review-front-end
 	
 	  The reward mechanism with cryptocurrency will significantly provide the incentivization, and encourage open-participation. We also have a faucet mechanism for getting free tokens to start.
 	- SmartReviewContract.sol is used for providing basic data types and functions to support our application, such as initiating a smartReview, reviewing one's work, and completing the reviews/SmartReview.
-	- GovernorContract.sol is A governor contract and voting DAO to support voting for reviews.
+	- GovernorContract.sol is used to manage proposals that are generated from reviews in our application. SmartToken holders can interact with this contract to vote for, against or abstain on each proposal deciding whether or not the review is good enough. Once the proposal is passed, the predefined code will be executed and the reviewer can get the compensation. For each proposal there are some settings (current settings for test):
+ 		- Voting period (5 minutes): period of time allowed to vote.
+   		- Quorum needed (100): number of tokens needed to pass the proposal.
+     		- Proposal threshold (1): number of tokens needed to create proposal.
+       		- Queue: the period of time that the proposal is postaponed before execution, members can act accordingly in this time.
+ 	- SmartTokenFaucet.sol is used to provide free SmartTokens for new members. New members can get a certain amount of SmartTokens to start their journey on our platform.
  	- A user-friendly frontend to visualize all operations.
     - IPFS for distributed decentralized file storage.
 - Target users include:
@@ -65,12 +73,10 @@ __Note:__ please watch the [instruction video]() section at first.
 - __Front-end Local Setup:__ You must install dependencies for our front end. Please clone our front-end repository at first, then switch to the root directory and run __npm install__ to install all required libraries, and run __npm start__ to start the front end. We have deployed all smart contracts for you.
 - __Tests__: We use the front end for usability tests and all the functionality has been achieved.
 - __Smart contracts Setup__: This repository holds all smart contracts for this application, you can first clone this repository in the [Remix](https://remix.ethereum.org/), a browser-embedded IDE for smart contracts implemented with Solidity. Then compile and deploy each smart contract by the following steps:
-	- ...
 	- Compile the SmartToken contract, and then deploy it.
  	- Compile the SmartTokenFacet contract, and then deploy it.
- 	- Compile the VotingDAO contract, and then deploy it.
   	- Compile the TimeLock contract, and then deploy it.
-  	- Compile the GovernorContract contract, and then deploy it.
+  	- Compile the GovernorContract contract, provide the address of the SmartToken contract and then deploy it. Remember to grant TimeLock roles to the Governor, otherwise the Governor can't perform correctly. Please check [this](https://docs.openzeppelin.com/defender/v1/guide-timelock-roles) for TimeLock Role explainations.
  	- Compile the SmartReviewContract contract, and provide the address of the SmartToken contract to the SmartReviewContract contract to deploy it.
 
 ## :heavy_exclamation_mark: Acknowledgement
