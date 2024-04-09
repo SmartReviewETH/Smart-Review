@@ -40,13 +40,11 @@ https://github.com/SmartReviewETH/smart-review-front-end
 		- A reviewer will be rewarded if the proposals of his/her reviews are approved and executed after reaching a quorum in SmartReview DAO.
 		- A member of the DAO will be rewarded if his/her voted proposals are approved and executed
 	
-	 	The reward mechanism with cryptocurrency will significantly provide the incentivization, and encourage open-participation. We also have a faucet mechanism for getting free tokens to start.
+	  The reward mechanism with cryptocurrency will significantly provide the incentivization, and encourage open-participation. We also have a faucet mechanism for getting free tokens to start.
 	- SmartReviewContract.sol is used for providing basic data types and functions to support our application, such as initiating a smartReview, reviewing one's work, and completing the reviews/SmartReview.
 	- GovernorContract.sol is A governor contract and voting DAO to support voting for reviews.
  	- A user-friendly frontend to visualize all operations.
-    	- IPFS for distributed decentralized file storage.
-
-- Please watch [this]() video on how to use this app.
+    - IPFS for distributed decentralized file storage.
 - Target users include:
 	- A researcher new to the research community and has some potential cutting-edge discoveries/inventions. He/she can submit his/her work on our platform and request reviews.
 	- A researcher who wishes to get inspired by others' works and wishes to earn incentives by leave a review on our platform.
