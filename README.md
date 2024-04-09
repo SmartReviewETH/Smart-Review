@@ -67,6 +67,10 @@ Actually you do not have to setup this application locally, since you can access
 - __Smart contracts deployment__: You do not have to deploy any, but here is an instruction on deployment. This repository holds all smart contracts for this application, you can first clone this repository to the [Remix](https://remix.ethereum.org/), a browser-embedded IDE for smart contracts implemented with Solidity. Then compile and deploy each smart contract by the following steps:
 	- ...
 	- Compile the SmartToken contract, and then deploy it.
+ 	- Compile the SmartTokenFacet contract, and then deploy it.
+ 	- Compile the VotingDAO contract, and then deploy it.
+  	- Compile the TimeLock contract, and then deploy it.
+  	- Compile the GovernorContract contract, and then deploy it.
  	- Compile the SmartReviewContract contract, and provide the address of SmartToken contract to SmartReviewContract contract to deploy it.
 
 ## :heavy_exclamation_mark: Acknowledgement
