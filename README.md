@@ -1,6 +1,6 @@
 
 # Smart-Review(Decentralized Review Platform)
-| [:rocket: Quick Start](#rocket-quick-start) | [:mortar_board: How to use](#mortar_board-how-to-use) | [:fire: Why choose Smart-Review](#fire-why-choose-smart-review) | \
+| [:rocket: Quick Start](#rocket-quick-start) | [:mortar_board: How to use](#mortar_board-how-to-use) | [:fire: Why choose Smart-Review](#fire--why-choose-smart-review) | \
 | [:pager: Local setup instructions](#pager-local-setup-instructions) | [:heavy_exclamation_mark: Acknowledgement](#heavy_exclamation_mark-acknowledgement) |
 
 ## :page_with_curl: License
