@@ -1,6 +1,6 @@
 
 # Smart-Review(Decentralized Review Platform)
-| [:rocket:Quick Start](#quick-start) | [:mortar_board:How to use](#how-to-use) | [:fire:Why choose Smart Review](#why-choose-smart-review) |
+| [:rocket:Quick Start](#-quick-start) | [:mortar_board:How to use](#-how-to-use) | [:fire:Why choose Smart Review](#-why-choose-smart-review) |
 
 ## :page_with_curl: License
 MIT license
