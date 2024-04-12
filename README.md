@@ -1,6 +1,7 @@
 
 # Smart-Review(Decentralized Review Platform)
-| [:rocket:Quick Start](#rocket-quick-start) | [:mortar_board:How to use](#mortar_board-how-to-use) | [:fire:Why choose Smart Review](#fire-why-choose-smart-review) |
+| [:rocket: Quick Start](#rocket-quick-start) | [:mortar_board: How to use](#mortar_board-how-to-use) | [:fire: Why choose Smart-Review](#fire-why-choose-smart-review) | \
+| [:pager: Local setup instructions](#pager-local-setup-instructions) | [:heavy_exclamation_mark: Acknowledgement](#heavy_exclamation_mark-acknowledgement) |
 
 ## :page_with_curl: License
 MIT license
@@ -10,8 +11,9 @@ MIT license
 - This repository involves the smart contracts written in solidity
 
 ## :rocket: Quick Start
-Link to our [Web App](https://smartreview1.netlify.app) .
-Before running it, please ensure:
+Link to our [Web App](https://smartreview1.netlify.app) . \
+:pushpin: Before running it, we strongly suggest you to read the section [:mortar_board: How to use](#mortar_board-how-to-use) \
+:heavy_exclamation_mark: And please ensure:
 
  - Meta Mask installed (Mobile APP or browser plugin)
  - Sepolia ETH available (gas fee for all the operations on our platform)
@@ -23,15 +25,16 @@ Before running it, please ensure:
  - [Infura Sepolia Faucet](https://www.infura.io/faucet/sepolia)
 
 ## :mortar_board: How to use?
-__Note:__ please watch the following instruction video at first.
+:pushpin: __Note:__ please watch the following instruction video at first.
 
 
 [![Please watch this instruction video](https://img.youtube.com/vi/V5dHaQT7ybU/0.jpg)](https://www.youtube.com/watch?v=V5dHaQT7ybU)
 
 
-- __How to set up the application?__ We have provided an [online application](https://smartreview1.netlify.app) for you, so you do not have to setup locally.
+- __How to set up the application?__ We have provided an [online application](https://smartreview1.netlify.app) for you, so you do not have to setup locally. \
+   Please go to [:rocket: Quick Start](#rocket-quick-start) after finishing this section.
 - __Any required library?__ No, this application has been deployed on cloud.
-- __How to run it?__ Please follow the [demo video](), which walks through all the operations you can take.
+- __How to run it?__ Please follow the [demo video](https://www.youtube.com/watch?v=V5dHaQT7ybU) above, which walks through all the operations you can take.
 - __How this application helps different types of users?__ We are proud to say that our application can adapt the general usage for all kinds of users who would like share their innovative ideas and leave reviews on these ideas which can then be voted to guarantee the quality. All the operations are incentivized.
 - __About wallet?__ Please connect to your Metamask account to support any transaction on this platform. We use __sepolia__ as our testnet. Please get at least 0.01 SepoliaETH before connecting any operation since you need this to start any transaction
 
