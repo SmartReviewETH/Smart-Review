@@ -1,3 +1,4 @@
+
 # Smart-Review(Decentralized Review Platform)
 |[:rocket:Quick Start](#start_id) | [:fire:Why choose Smart Review](#wse-id)|
 
@@ -20,6 +21,19 @@ Before running it, please ensure:
 	
  - [Alchemy Sepolia Faucet](https://www.alchemy.com/faucets/ethereum-sepolia)
  - [Infura Sepolia Faucet](https://www.infura.io/faucet/sepolia)
+
+## :mortar_board: How to use?
+__Note:__ please watch the following instruction video at first.
+
+
+[![Please watch this instruction video](https://img.youtube.com/vi/V5dHaQT7ybU/0.jpg)](https://www.youtube.com/watch?v=V5dHaQT7ybU)
+
+
+- __How to set up the application?__ We have provided an [online application](https://smartreview1.netlify.app) for you, so you do not have to setup locally.
+- __Any required library?__ No, this application has been deployed on cloud.
+- __How to run it?__ Please follow the [demo video](), which walks through all the operations you can take.
+- __How this application helps different types of users?__ We are proud to say that our application can adapt the general usage for all kinds of users who would like share their innovative ideas and leave reviews on these ideas which can then be voted to guarantee the quality. All the operations are incentivized.
+- __About wallet?__ Please connect to your Metamask account to support any transaction on this platform. We use __sepolia__ as our testnet. Please get at least 0.01 SepoliaETH before connecting any operation since you need this to start any transaction
 
 ## :eyes: Front end Github repo
 https://github.com/SmartReviewETH/smart-review-front-end
@@ -59,14 +73,6 @@ https://www.tally.xyz/gov/smartreview
  	- A researcher who has an opinion on others' reviews and can participate in voting about the reviews.
 	- Practitioners with other occupations with similar goals.
 
-## :mortar_board: How to use?
-__Note:__ please watch the [instruction video]() section at first.
-
-- __How to set up the application?__ We have provided an [online application](https://smartreview1.netlify.app) for you, so you do not have to setup locally.
-- __Any required library?__ No, this application has been deployed on cloud.
-- __How to run it?__ Please follow the [demo video](), which walks through all the operations you can take.
-- __How this application helps different types of users?__ We are proud to say that our application can adapt the general usage for all kinds of users who would like share their innovative ideas and leave reviews on these ideas which can then be voted to guarantee the quality. All the operations are incentivized.
-- __About wallet?__ Please connect to your Metamask account to support any transaction on this platform. We use __sepolia__ as our testnet. Please get at least 0.01 SepoliaETH before connecting any operation since you need this to start any transaction
 
 ## :pager: Local setup instructions
 
