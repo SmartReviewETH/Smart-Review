@@ -8,7 +8,7 @@ MIT license
 
 ## :star: Context
 - Smart-Review is a decentralized review platform with an incentivized and private reviewing mechanism.
-- Our project consists of two GitHub repositories. This repository involves the smart contracts written in solidity, which constitutes the backend of our application. Please access the frontend repository in the [**Front end Github repo**](https://github.com/SmartReviewETH/Smart-Review?tab=readme-ov-file#eyes-front-end-github-repo) section. The primary description of our project can be found in this Readme documentation.
+- Our project consists of two GitHub repositories. This repository involves the smart contracts written in solidity, which constitutes the **backend** of our application. Please access the frontend repository in the [**Front end Github repo**](https://github.com/SmartReviewETH/Smart-Review?tab=readme-ov-file#eyes-front-end-github-repo) section. The primary description of our project can be found in this Readme documentation.
 
 ## :rocket: Quick Start
 Link to our [Web App](https://smartreview1.netlify.app) . \
